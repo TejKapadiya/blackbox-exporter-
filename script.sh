@@ -111,7 +111,9 @@ EOF
 
 systemctl daemon-reexec
 systemctl daemon-reload
-systemctl disable prometheus
+systemctl enable prometheus
+
+systemctl start prometheus
 
 # =========================
 # NODE EXPORTER
@@ -213,7 +215,8 @@ echo "Stopping Grafana service"
 systemctl stop grafana-server || true
 
 echo "Disabling Grafana at boot"
-systemctl disable grafana-server || true
+systemctl enable grafana-server
+systemctl start grafana-server
 
 
 echo "===== GRAFANA INSTALL COMPLETE ====="
@@ -435,4 +438,5 @@ curl -s -X POST "$GRAFANA_URL/api/dashboards/db" \
     },
     \"overwrite\": true
   }"
+
 
